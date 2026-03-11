@@ -258,8 +258,8 @@ func fetchLatestModels() {
 // inferModelConfig 根据模型名称自动推断配置
 func inferModelConfig(modelID string) (enableThinking bool, autoWebSearch bool, mcpServers []string) {
 	idLower := strings.ToLower(modelID)
-	enableThinking = true
-	autoWebSearch = true
+	enableThinking = strings.HasSuffix(idLower, "-thinking")
+	autoWebSearch = strings.HasSuffix(idLower, "-search") || strings.HasSuffix(idLower, "-thinking-search")
 	mcpServers = []string{"advanced-search"}
 	if strings.Contains(idLower, "-v") {
 		mcpServers = append(mcpServers, "vlm-image-search", "vlm-image-recognition", "vlm-image-processing")
