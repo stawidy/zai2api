@@ -659,7 +659,7 @@ func handleStreamResponse(w http.ResponseWriter, body io.ReadCloser, completionI
 	scanner := bufio.NewScanner(body)
 	scanner.Buffer(make([]byte, 1024*1024), 1024*1024)
 	hasContent := false
-	searchRefFilter := NewSearchRefFilter()
+	searchRefFilter := NewSearchRefFilter(modelName)
 	thinkingFilter := &ThinkingFilter{}
 	pendingSourcesMarkdown := ""
 	pendingImageSearchMarkdown := ""
@@ -1091,7 +1091,7 @@ func handleNonStreamResponse(w http.ResponseWriter, body io.ReadCloser, completi
 	var chunks []string
 	var reasoningChunks []string
 	thinkingFilter := &ThinkingFilter{}
-	searchRefFilter := NewSearchRefFilter()
+	searchRefFilter := NewSearchRefFilter(modelName)
 	hasThinking := false
 	pendingSourcesMarkdown := ""
 	pendingImageSearchMarkdown := ""
@@ -1296,7 +1296,7 @@ func handleStreamResponseWithRetry(w http.ResponseWriter, body io.ReadCloser, co
 	scanner := bufio.NewScanner(body)
 	scanner.Buffer(make([]byte, 1024*1024), 1024*1024)
 	hasContent := false
-	searchRefFilter := NewSearchRefFilter()
+	searchRefFilter := NewSearchRefFilter(modelName)
 	thinkingFilter := &ThinkingFilter{}
 	pendingSourcesMarkdown := ""
 	pendingImageSearchMarkdown := ""
@@ -1746,7 +1746,7 @@ func handleNonStreamResponseWithRetry(w http.ResponseWriter, body io.ReadCloser,
 	var chunks []string
 	var reasoningChunks []string
 	thinkingFilter := &ThinkingFilter{}
-	searchRefFilter := NewSearchRefFilter()
+	searchRefFilter := NewSearchRefFilter(modelName)
 	hasThinking := false
 	pendingSourcesMarkdown := ""
 	pendingImageSearchMarkdown := ""

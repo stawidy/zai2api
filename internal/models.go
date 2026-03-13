@@ -296,12 +296,18 @@ type SearchResult struct {
 type SearchRefFilter struct {
 	buffer        string
 	searchResults map[string]SearchResult
+	modelName     string
 }
 
-func NewSearchRefFilter() *SearchRefFilter {
+func NewSearchRefFilter(modelName string) *SearchRefFilter {
 	return &SearchRefFilter{
 		searchResults: make(map[string]SearchResult),
+		modelName:     modelName,
 	}
+}
+
+func (f *SearchRefFilter) isGLM5Model() bool {
+	return strings.HasPrefix(strings.ToUpper(f.modelName), "GLM-5")
 }
 
 func (f *SearchRefFilter) AddSearchResults(results []SearchResult) {
@@ -372,6 +378,10 @@ func (f *SearchRefFilter) Flush() string {
 
 func (f *SearchRefFilter) GetSearchResultsMarkdown() string {
 	if len(f.searchResults) == 0 {
+		return ""
+	}
+
+	if f.isGLM5Model() {
 		return ""
 	}
 
