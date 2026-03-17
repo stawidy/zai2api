@@ -8,7 +8,7 @@
 ## 功能特性
 
 - **OpenAI 兼容 API** - 支持 `/v1/chat/completions` 和 `/v1/models` 端点
-- **多模型支持** - GLM-4.5、GLM-4.5-Thinking、GLM-4.5-Search、GLM-4.5-Air 等
+- **多模型支持** - glm-4.5、glm-4.5-thinking、glm-4.5-search、glm-4.5-air 等
 - **流式响应** - 支持 SSE 流式输出
 - **工具调用** - 支持 Function Calling
 - **多模态** - 支持图片输入
@@ -84,7 +84,7 @@ curl http://localhost:8000/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer your-api-key" \
   -d '{
-    "model": "GLM-4.5",
+    "model": "glm-4.5",
     "messages": [{"role": "user", "content": "Hello!"}],
     "stream": true
   }'
@@ -101,7 +101,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="GLM-4.5",
+    model="glm-4.5",
     messages=[{"role": "user", "content": "Hello!"}]
 )
 print(response.choices[0].message.content)
@@ -109,11 +109,11 @@ print(response.choices[0].message.content)
 
 ## 支持的模型
 
-- `GLM-4.5` - 主模型
-- `GLM-4.5-Thinking` - 思考模型
-- `GLM-4.5-Search` - 搜索增强模型
-- `GLM-4.5-Air` - 轻量模型
-- `GLM-4.6` 系列（新版）
+- `glm-4.5` - 主模型
+- `glm-4.5-thinking` - 思考模型
+- `glm-4.5-search` - 搜索增强模型
+- `glm-4.5-air` - 轻量模型
+- `glm-4.6` 系列（新版）
 
 ## 项目结构
 
