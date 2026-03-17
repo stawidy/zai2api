@@ -8,41 +8,44 @@ import (
 )
 
 var BaseModelMapping = map[string]string{
-	"GLM-4.5":      "0727-360B-API",
-	"GLM-4.6":      "GLM-4-6-API-V1",
-	"GLM-4.7":      "glm-4.7",
-	"GLM-5":        "glm-5",
-	"GLM-4.5-V":    "glm-4.5v",
-	"GLM-4.6-V":    "glm-4.6v",
-	"GLM-4.5-Air":  "0727-106B-API",
-	"0808-360B-DR": "0808-360B-DR",
+	"glm-4.5":      "0727-360B-API",
+	"glm-4.6":      "GLM-4-6-API-V1",
+	"glm-4.7":      "glm-4.7",
+	"glm-5":        "glm-5",
+	"glm-4.5-v":    "glm-4.5v",
+	"glm-4.6-v":    "glm-4.6v",
+	"glm-4.5-air":  "0727-106B-API",
+	"0808-360b-dr": "0808-360B-DR",
 }
 var ModelList = []string{
-	"GLM-4.5",
-	"GLM-4.6",
-	"GLM-4.7",
-	"GLM-5",
-	"GLM-4.5-thinking",
-	"GLM-4.6-thinking",
-	"GLM-4.7-thinking",
-	"GLM-4.5-V",
-	"GLM-4.6-V",
-	"GLM-4.6-V-thinking",
-	"GLM-4.5-Air",
-	"0808-360B-DR",
+	"glm-4.5",
+	"glm-4.6",
+	"glm-4.7",
+	"glm-5",
+	"glm-4.5-thinking",
+	"glm-4.6-thinking",
+	"glm-4.7-thinking",
+	"glm-4.5-v",
+	"glm-4.6-v",
+	"glm-4.6-v-thinking",
+	"glm-4.5-air",
+	"0808-360b-dr",
 }
 
 func ParseModelName(model string) (baseModel string, enableThinking bool, enableSearch bool) {
 	enableThinking = false
 	enableSearch = false
+	idLower := strings.ToLower(model)
 	baseModel = model
 	for {
-		if strings.HasSuffix(baseModel, "-thinking") {
+		if strings.HasSuffix(idLower, "-thinking") {
 			enableThinking = true
 			baseModel = strings.TrimSuffix(baseModel, "-thinking")
-		} else if strings.HasSuffix(baseModel, "-search") {
+			idLower = strings.TrimSuffix(idLower, "-thinking")
+		} else if strings.HasSuffix(idLower, "-search") {
 			enableSearch = true
 			baseModel = strings.TrimSuffix(baseModel, "-search")
+			idLower = strings.TrimSuffix(idLower, "-search")
 		} else {
 			break
 		}
@@ -63,7 +66,7 @@ func IsSearchModel(model string) bool {
 
 func GetTargetModel(model string) string {
 	baseModel, _, _ := ParseModelName(model)
-	if target, ok := BaseModelMapping[baseModel]; ok {
+	if target, ok := BaseModelMapping[strings.ToLower(baseModel)]; ok {
 		return target
 	}
 	return model
@@ -71,7 +74,7 @@ func GetTargetModel(model string) string {
 
 func IsValidModel(model string) bool {
 	baseModel, _, _ := ParseModelName(model)
-	if _, ok := BaseModelMapping[baseModel]; ok {
+	if _, ok := BaseModelMapping[strings.ToLower(baseModel)]; ok {
 		return true
 	}
 	if GetUpstreamConfig(model) != nil {

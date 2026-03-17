@@ -116,13 +116,13 @@ func LoadConfig() {
 		BackupTokens: getEnvStringSlice("BACKUP_TOKEN"),
 
 		// Model Configuration
-		PrimaryModel:     getEnvString("PRIMARY_MODEL", "GLM-4.5"),
-		ThinkingModel:    getEnvString("THINKING_MODEL", "GLM-4.5-Thinking"),
-		SearchModel:      getEnvString("SEARCH_MODEL", "GLM-4.5-Search"),
-		AirModel:         getEnvString("AIR_MODEL", "GLM-4.5-Air"),
-		PrimaryModelNew:  getEnvString("PRIMARY_MODEL_NEW", "GLM-4.6"),
-		ThinkingModelNew: getEnvString("THINKING_MODEL_NEW", "GLM-4.6-Thinking"),
-		SearchModelNew:   getEnvString("SEARCH_MODEL_NEW", "GLM-4.6-Search"),
+		PrimaryModel:     getEnvString("PRIMARY_MODEL", "glm-4.5"),
+		ThinkingModel:    getEnvString("THINKING_MODEL", "glm-4.5-thinking"),
+		SearchModel:      getEnvString("SEARCH_MODEL", "glm-4.5-search"),
+		AirModel:         getEnvString("AIR_MODEL", "glm-4.5-air"),
+		PrimaryModelNew:  getEnvString("PRIMARY_MODEL_NEW", "glm-4.6"),
+		ThinkingModelNew: getEnvString("THINKING_MODEL_NEW", "glm-4.6-thinking"),
+		SearchModelNew:   getEnvString("SEARCH_MODEL_NEW", "glm-4.6-search"),
 
 		// Feature Configuration
 		DebugLogging:       getEnvBool("DEBUG_LOGGING", false),

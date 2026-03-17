@@ -196,7 +196,7 @@ func GetModelMapping(modelID string) (ModelMapping, bool) {
 	baseModel, enableThinking, enableSearch := ParseModelName(modelID)
 	mappingsLock.RLock()
 	defer mappingsLock.RUnlock()
-	if mapping, ok := modelMappings[baseModel]; ok {
+	if mapping, ok := modelMappings[strings.ToLower(baseModel)]; ok {
 		if enableThinking {
 			mapping.EnableThinking = true
 		}
@@ -206,7 +206,7 @@ func GetModelMapping(modelID string) (ModelMapping, bool) {
 		}
 		return mapping, true
 	}
-	if mapping, ok := modelMappings[modelID]; ok {
+	if mapping, ok := modelMappings[strings.ToLower(modelID)]; ok {
 		return mapping, true
 	}
 	return ModelMapping{}, false
@@ -320,12 +320,12 @@ func updateDynamicMappings(models []ZAIModel) {
 
 // modelSuffixes 可用的后缀组合
 var modelSuffixes = []string{
-	"-thinking",        // 思考
-	"-search",          // 搜索
-	"-thinking-search", // 思考+搜索
+	"-thinking",
+	"-search",
+	"-thinking-search",
 }
 
-// isBaseSuffixModel 判断模型是否为基础模型（不含 -Thinking/-Search 后缀）从而可以生成后缀组合
+// isBaseSuffixModel 判断模型是否为基础模型（不含 -thinking/-search 后缀）从而可以生成后缀组合
 func isBaseSuffixModel(modelID string) bool {
 	idLower := strings.ToLower(modelID)
 	return !strings.HasSuffix(idLower, "-thinking") &&
@@ -348,7 +348,7 @@ func GetAvailableModels() []ModelInfo {
 		}
 		seen[key] = true
 		models = append(models, ModelInfo{
-			ID:      id,
+			ID:      strings.ToLower(id),
 			Object:  "model",
 			OwnedBy: ownedBy,
 		})
