@@ -300,17 +300,19 @@ type SearchRefFilter struct {
 	buffer        string
 	searchResults map[string]SearchResult
 	modelName     string
+	isGLM5        bool
 }
 
 func NewSearchRefFilter(modelName string) *SearchRefFilter {
 	return &SearchRefFilter{
 		searchResults: make(map[string]SearchResult),
 		modelName:     modelName,
+		isGLM5:        strings.HasPrefix(strings.ToLower(modelName), "glm-5"),
 	}
 }
 
 func (f *SearchRefFilter) isGLM5Model() bool {
-	return strings.HasPrefix(strings.ToUpper(f.modelName), "GLM-5")
+	return f.isGLM5
 }
 
 func (f *SearchRefFilter) AddSearchResults(results []SearchResult) {
