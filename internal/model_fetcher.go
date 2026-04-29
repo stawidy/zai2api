@@ -68,28 +68,36 @@ func isVisionModelID(idLower string) bool {
 func initBuiltinMappings() {
 	mappingsLock.Lock()
 	defer mappingsLock.Unlock()
-	registerBuiltinModel("GLM-4.5", "0727-360B-API", "GLM-4.5", true, false, true, []string{"advanced-search"})
-	registerBuiltinModel("GLM-4.5-Thinking", "0727-360B-API", "GLM-4.5-Thinking", true, false, true, []string{"advanced-search"})
-	registerBuiltinModel("GLM-4.5-Search", "0727-360B-API", "GLM-4.5-Search", true, true, true, []string{"advanced-search", "deep-web-search"})
-	registerBuiltinModel("GLM-4.5-Air", "0727-106B-API", "GLM-4.5-Air", true, false, true, []string{"advanced-search"})
-	registerBuiltinModel("GLM-4.6", "GLM-4-6-API-V1", "GLM-4.6", true, false, true, []string{"advanced-search"})
-	registerBuiltinModel("GLM-4.6-Thinking", "GLM-4-6-API-V1", "GLM-4.6-Thinking", true, false, true, []string{"advanced-search"})
-	registerBuiltinModel("GLM-4.6-Search", "GLM-4-6-API-V1", "GLM-4.6-Search", true, true, true, []string{"advanced-search", "deep-web-search"})
-	registerBuiltinModel("GLM-4.7", "glm-4.7", "GLM-4.7", true, false, true, []string{"advanced-search"})
-	registerBuiltinModel("GLM-4.7-Thinking", "glm-4.7", "GLM-4.7-Thinking", true, false, true, []string{"advanced-search"})
-	registerBuiltinModel("GLM-4.7-Search", "glm-4.7", "GLM-4.7-Search", true, true, true, []string{"advanced-search", "deep-web-search"})
-	registerBuiltinModel("GLM-4.5-V", "glm-4.5v", "GLM-4.5-V", true, false, true, []string{"advanced-search"})
-	registerBuiltinModel("GLM-4.6-V", "glm-4.6v", "GLM-4.6-V", true, false, true, []string{"advanced-search", "vlm-image-search", "vlm-image-recognition", "vlm-image-processing"})
-	registerBuiltinModel("glm-4.6v", "glm-4.6v", "glm-4.6v", true, false, true, []string{"advanced-search", "vlm-image-search", "vlm-image-recognition", "vlm-image-processing"})
+
+	// Base models (no suffix): thinking OFF, search OFF
+	registerBuiltinModel("GLM-4.5", "0727-360B-API", "GLM-4.5", false, false, false, []string{"advanced-search"})
+	registerBuiltinModel("GLM-4.5-Air", "0727-106B-API", "GLM-4.5-Air", false, false, false, []string{"advanced-search"})
+	registerBuiltinModel("GLM-4.6", "GLM-4-6-API-V1", "GLM-4.6", false, false, false, []string{"advanced-search"})
+	registerBuiltinModel("GLM-4.7", "glm-4.7", "GLM-4.7", false, false, false, []string{"advanced-search"})
+	registerBuiltinModel("GLM-4.5-V", "glm-4.5v", "GLM-4.5-V", false, false, false, []string{"advanced-search"})
+	registerBuiltinModel("GLM-4.6-V", "glm-4.6v", "GLM-4.6-V", false, false, false, []string{"advanced-search", "vlm-image-search", "vlm-image-recognition", "vlm-image-processing"})
+	registerBuiltinModel("glm-4.6v", "glm-4.6v", "glm-4.6v", false, false, false, []string{"advanced-search", "vlm-image-search", "vlm-image-recognition", "vlm-image-processing"})
 	registerBuiltinModel("GLM-5", "glm-5", "GLM-5", false, false, false, []string{})
+	registerBuiltinModel("GLM-5-Turbo", "GLM-5-Turbo", "GLM-5-Turbo", false, false, false, []string{"advanced-search"})
+	registerBuiltinModel("GLM-5v-Turbo", "GLM-5v-Turbo", "GLM-5v-Turbo", false, false, false, []string{"advanced-search", "vlm-image-search", "vlm-image-recognition", "vlm-image-processing"})
+	registerBuiltinModel("GLM-5.1", "GLM-5.1", "GLM-5.1", false, false, false, []string{"advanced-search"})
+	registerBuiltinModel("glm-4-flash", "glm-4-flash", "glm-4-flash", false, false, false, []string{})
+	registerBuiltinModel("glm-4-air-250414", "glm-4-air-250414", "glm-4-air-250414", false, false, false, []string{})
+
+	// -Thinking suffix: thinking ON, search OFF
+	registerBuiltinModel("GLM-4.5-Thinking", "0727-360B-API", "GLM-4.5-Thinking", true, false, false, []string{"advanced-search"})
+	registerBuiltinModel("GLM-4.6-Thinking", "GLM-4-6-API-V1", "GLM-4.6-Thinking", true, false, false, []string{"advanced-search"})
+	registerBuiltinModel("GLM-4.7-Thinking", "glm-4.7", "GLM-4.7-Thinking", true, false, false, []string{"advanced-search"})
 	registerBuiltinModel("GLM-5-Thinking", "glm-5", "GLM-5-Thinking", true, false, false, []string{})
+
+	// -Search suffix: thinking ON, search ON
+	registerBuiltinModel("GLM-4.5-Search", "0727-360B-API", "GLM-4.5-Search", true, true, true, []string{"advanced-search", "deep-web-search"})
+	registerBuiltinModel("GLM-4.6-Search", "GLM-4-6-API-V1", "GLM-4.6-Search", true, true, true, []string{"advanced-search", "deep-web-search"})
+	registerBuiltinModel("GLM-4.7-Search", "glm-4.7", "GLM-4.7-Search", true, true, true, []string{"advanced-search", "deep-web-search"})
 	registerBuiltinModel("GLM-5-Search", "glm-5", "GLM-5-Search", true, true, true, []string{"advanced-search", "deep-web-search"})
-	registerBuiltinModel("GLM-5-Turbo", "GLM-5-Turbo", "GLM-5-Turbo", true, false, true, []string{"advanced-search"})
-	registerBuiltinModel("GLM-5v-Turbo", "GLM-5v-Turbo", "GLM-5v-Turbo", true, false, true, []string{"advanced-search", "vlm-image-search", "vlm-image-recognition", "vlm-image-processing"})
-	registerBuiltinModel("GLM-5.1", "GLM-5.1", "GLM-5.1", true, false, true, []string{"advanced-search"})
-	registerBuiltinModel("glm-4-flash", "glm-4-flash", "glm-4-flash", true, false, true, []string{"advanced-search"})
-	registerBuiltinModel("glm-4-air-250414", "glm-4-air-250414", "glm-4-air-250414", true, false, true, []string{"advanced-search"})
-	registerBuiltinModel("GLM-4.1V-Thinking-FlashX", "GLM-4.1V-Thinking-FlashX", "GLM-4.1V-Thinking-FlashX", true, false, true, []string{"advanced-search", "vlm-image-search", "vlm-image-recognition", "vlm-image-processing"})
+
+	// Special models (Thinking is part of model ID, not a suffix pattern)
+	registerBuiltinModel("GLM-4.1V-Thinking-FlashX", "GLM-4.1V-Thinking-FlashX", "GLM-4.1V-Thinking-FlashX", false, false, false, []string{"advanced-search", "vlm-image-search", "vlm-image-recognition", "vlm-image-processing"})
 }
 func GetModelMapping(modelID string) (ModelMapping, bool) {
 	baseModel, enableThinking, enableSearch := ParseModelName(modelID)
@@ -162,8 +170,8 @@ func fetchLatestModels() {
 // inferModelConfig 根据模型名称自动推断配置
 func inferModelConfig(modelID string) (enableThinking bool, autoWebSearch bool, mcpServers []string) {
 	idLower := strings.ToLower(modelID)
-	enableThinking = true
-	autoWebSearch = true
+	enableThinking = false
+	autoWebSearch = false
 	mcpServers = defaultMCPServersForModel(idLower)
 	return
 }
